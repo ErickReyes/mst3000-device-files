@@ -17,10 +17,14 @@
 
 PRODUCT_COPY_FILES := \
 	device/ti/am335xevm/init.am335xevm.rc:root/init.am335xevm.rc \
+	device/ti/am335xevm/init.var-som-am33.rc:root/init.var-som-am33.rc \
 	device/ti/am335xevm/init.am335xevm.usb.rc:root/init.am335xevm.usb.rc \
+	device/ti/am335xevm/init.var-som-am33.usb.rc:root/init.var-som-am33.usb.rc \
 	device/ti/am335xevm/ueventd.am335xevm.rc:root/ueventd.am335xevm.rc \
+	device/ti/am335xevm/ueventd.var-som-am33.rc:root/ueventd.var-som-am33.rc \
 	device/ti/am335xevm/vold.fstab:system/etc/vold.fstab \
 	device/ti/am335xevm/fstab.am335xevm:root/fstab.am335xevm \
+	device/ti/am335xevm/fstab.var-am33-som-nand:root/fstab.var-am33-som-nand \
 	device/ti/am335xevm/media_codecs.xml:system/etc/media_codecs.xml \
 	device/ti/am335xevm/media_profiles.xml:system/etc/media_profiles.xml \
 	device/ti/am335xevm/mixer_paths.xml:system/etc/mixer_paths.xml \
