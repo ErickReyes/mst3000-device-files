@@ -62,6 +62,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
     $(LOCAL_PATH)/matrix-keypad.kl:system/usr/keylayout/matrix-keypad.kl \
+    $(LOCAL_PATH)/power-key.kl:system/usr/keylayout/power-key.kl \
     $(LOCAL_PATH)/ti-tsc.idc:system/usr/idc/ti-tsc.idc
 
 PRODUCT_PROPERTY_OVERRIDES := \
