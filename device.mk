@@ -131,8 +131,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	lights.am335xevm
 
-PRODUCT_PACKAGES += \
-	sensors.am335xevm
+# PRODUCT_PACKAGES += \
+#	sensors.am335xevm
 
 PRODUCT_PACKAGES += \
 	FileManager-1.1.6
