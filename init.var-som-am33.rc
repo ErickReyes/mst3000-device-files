@@ -56,6 +56,7 @@ on boot
     insmod /system/lib/modules/wlcore.ko
     insmod /system/lib/modules/wl12xx.ko
     insmod /system/lib/modules/wl18xx.ko
+    insmod /system/lib/modules/wlcore_sdio.ko
 
 on fs
     mount_all /fstab.var-am33-som-nand

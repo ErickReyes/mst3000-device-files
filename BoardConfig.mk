@@ -14,6 +14,11 @@
 # limitations under the License.
 #
 
+# The handling of attributes in eglCreateWindowSurface (frameworks/native/opengl/libs/EGL/eglApi.cpp) changed in KK 4.4.
+# However, a fallback was implemented specifically for the omap4/3 SoCs. This flags enables the workaround:
+COMMON_GLOBAL_CFLAGS += -DWORKAROUND_BUG_10194508=1
+
+
 # These two variables are set first, so they can be overridden
 # by BoardConfigVendor.mk
 #BOARD_USES_GENERIC_AUDIO := true
@@ -21,11 +26,12 @@
 BOARD_USB_CAMERA := true
 BOARD_EGL_CFG := device/ti/am335xevm/egl.cfg
 
+
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
-ARCH_ARM_HAVE_TLS_REGISTER := true
+TARGET_CPU_VARIANT := generic
 
 TARGET_NO_KERNEL := true
 
@@ -44,11 +50,13 @@ TARGET_BOOTLOADER_BOARD_NAME := am335xevm
 USE_OPENGL_RENDERER := true
 
 TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 268435456
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 536870912
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 536870912
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 4096
+
+BOARD_HAVE_BLUETOOTH_TI := true
 
 #TARGET_PROVIDES_INIT_RC := true
 
@@ -61,15 +69,6 @@ BOARD_WLAN_DEVICE                := wl12xx_mac80211
 BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
 WPA_SUPPLICANT_VERSION           := VER_0_8_X_TI
 
-ifeq ($(WILINK), wl18xx)
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlcore_sdio.ko"
-WIFI_DRIVER_MODULE_NAME          := "wlcore_sdio"
-else
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx_sdio.ko"
-WIFI_DRIVER_MODULE_NAME          := "wl12xx_sdio"
-endif
-
-WIFI_FIRMWARE_LOADER             := ""
 COMMON_GLOBAL_CFLAGS += -DUSES_TI_MAC80211
 endif
 

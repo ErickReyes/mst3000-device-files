@@ -32,8 +32,7 @@ PRODUCT_COPY_FILES := \
 
 # Bluetooth support
 PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
-	system/bluetooth/data/main.nonsmartphone.conf:system/etc/bluetooth/main.conf
+	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml
 
 # WLAN support
 PRODUCT_COPY_FILES +=\
@@ -113,7 +112,7 @@ PRODUCT_PACKAGES += \
 	TQS_S_2.6.ini \
 	crda \
         regulatory.bin \
-	calibrator
+	wlconf
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	 wifi.interface=wlan0
@@ -129,20 +128,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	make_ext4fs
 
-# BlueZ test tools
-PRODUCT_PACKAGES += \
-	hciconfig \
-	hcitool
-
 PRODUCT_PACKAGES += \
 	lights.am335xevm
 
 PRODUCT_PACKAGES += \
 	sensors.am335xevm
-
-# Accelerometer-based demo game
-PRODUCT_PACKAGES += \
-	Amazed
 
 PRODUCT_PACKAGES += \
 	FileManager-1.1.6
@@ -153,6 +143,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	rild
 
+
+# Include SGX if they exist: they won't on the first build
+ifneq ($(wildcard device/ti/am335xevm/sgx/system),)
+    $(call inherit-product, device/ti/am335xevm/device-sgx.mk)
+endif
+
+
 $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
-$(call inherit-product-if-exists, hardware/ti/wpan/wl12xx-bluetooth/wl12xx_bt_products.mk)
-$(call inherit-product-if-exists, hardware/ti/wlan/mac80211/firmware/wl12xx_wlan_fw_products.mk)
+$(call inherit-product-if-exists, hardware/ti/wpan/ti-wpan-products.mk)
+$(call inherit-product-if-exists, device/ti/proprietary-open/wl12xx/wlan/wl12xx-wlan-fw-products.mk)
+$(call inherit-product-if-exists, device/ti/proprietary-open/wl12xx/wpan/wl12xx-wpan-fw-products.mk)
