@@ -43,16 +43,7 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
 on post-fs
-    # once everything is setup, no need to modify /
-    mount rootfs rootfs / ro remount
-    mount ext4 /dev/block/mmcblk0p2 /system ro remount
-
-on boot
-
-# Default Read Ahead value for sdcards
-    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
-
-# wi-fi
+    # wi-fi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     insmod /system/lib/modules/compat.ko
@@ -62,6 +53,19 @@ on boot
     insmod /system/lib/modules/wl12xx.ko
     insmod /system/lib/modules/wl18xx.ko
     insmod /system/lib/modules/wlcore_sdio.ko
+    insmod /system/lib/modules/bq27x00_battery.ko
+    # once everything is setup, no need to modify /
+    mount rootfs rootfs / ro remount
+    mount ext4 /dev/block/mmcblk0p2 /system ro remount
+    
+
+on boot
+
+# Disable suspend
+    write /sys/power/wake_lock test
+
+# Default Read Ahead value for sdcards
+    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
 
 on fs
     mount_all /fstab.am335xevm
@@ -80,8 +84,7 @@ on fs
     # This board has landscape LCD, enable rotation of keys on Navigation bar
     setprop lcd.landscape true
 
-    # This board does not have battery, force battery-level to 100%
-    setprop hw.nobattery true
+    setprop hw.nobattery false
 
 # Restart adbd after android is ready. Otherwise the host does not detect the device
 # when booted with USB cable attached.
