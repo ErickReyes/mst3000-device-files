@@ -118,7 +118,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	 wifi.interface=wlan0
 # BT
  PRODUCT_PACKAGES += \
-	 libbt-vendor
+	libbt-vendor \
+	uim-sysfs \
+	bt_sco_app \
+	kfmapp     \
+    BluetoothSCOApp
 
 # Bluetooth A2DP audio support
 PRODUCT_PACKAGES += \
@@ -151,6 +155,5 @@ endif
 
 
 $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
-$(call inherit-product-if-exists, hardware/ti/wpan/ti-wpan-products.mk)
 $(call inherit-product-if-exists, device/ti/proprietary-open/wl12xx/wlan/wl12xx-wlan-fw-products.mk)
 $(call inherit-product-if-exists, device/ti/proprietary-open/wl12xx/wpan/wl12xx-wpan-fw-products.mk)
